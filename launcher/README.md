@@ -1,5 +1,7 @@
 # Horizon launcher
 
+> Forked by AI assistant and qwin.
+
 A small desktop app that installs Horizon builds, prepares them from your own copy of
 Minecraft, and starts the client or a dedicated server. Built with [GPUI](https://www.gpui.rs),
 Zed's UI framework; it has its own Cargo workspace and is not part of the game's builds.
@@ -456,7 +458,22 @@ are measured as they enter view; hidden ranges share spacers in the existing pag
 On Windows, `cargo test --bin horizon-launcher desktop_list_renders_the_viewport_after_scrollbar_jumps
 -- --ignored` checks 10,000 rows of different heights in a real GPUI window (requires an awake desktop/GPU).
 
-## Building
+## Quick start (no build)
+
+Download the latest release for your OS from GitHub Releases, unpack it, then:
+
+- Linux / macOS: run `./run.sh`
+- Windows: double-click `run.bat`
+
+The scripts set up isolated data folders so your real player data is never touched, and auto-detect your Minecraft install (official launcher, Prism, MultiMC, Modrinth, ATLauncher, GDLauncher, ElyPrism).
+
+## Playing offline
+
+1. Put your Minecraft client files where the launcher can find them (official `~/.minecraft`, Prism/ElyPrism root, etc.).
+2. Run `./run.sh` (or `run.bat` on Windows).
+3. Open **Settings → Minecraft folder** and pick your install if it wasn't auto-detected.
+4. On the **Play** page press **Prepare** (From my install), then **Play**.
+5. The game runs with an offline name; no Microsoft account or license is required.
 
     cargo build --release
 

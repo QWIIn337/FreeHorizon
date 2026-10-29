@@ -9,7 +9,10 @@ use std::process::{Child, ChildStdin, Command, Stdio};
 use std::sync::mpsc::Sender;
 use std::sync::{Arc, Mutex};
 
-pub const REPO: &str = "horizon-rust/horizon";
+pub const REPO: &str = match option_env!("HORIZON_LAUNCHER_REPO") {
+    Some(v) if !v.is_empty() => v,
+    _ => "horizon-rust/horizon",
+};
 pub const README_URL: &str = "https://github.com/horizon-rust/horizon/blob/main/launcher/README.md";
 /// The players' page on connecting an AI agent (the website's docs/agents.md).
 pub const AGENT_DOCS_URL: &str = "https://playhorizon.dev/docs/agents";
@@ -2850,7 +2853,7 @@ pub struct Settings {
     #[serde(default)]
     pub partner_seen_secs: u64,
     /// The player hid the sidebar's partner banner. The Servers page keeps its own.
-    #[serde(default)]
+    #[serde(default = "default_true")]
     pub partner_hidden: bool,
     /// What the window does while the game runs. Stays by default.
     #[serde(default)]
@@ -2875,6 +2878,12 @@ pub struct Settings {
     /// comes from the player's own install. Off by default, and absent from the file while off.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub dev_offline: bool,
+    #[serde(default = "default_true")]
+    pub offline_mode: bool,
+}
+
+fn default_true() -> bool {
+    true
 }
 
 impl Settings {

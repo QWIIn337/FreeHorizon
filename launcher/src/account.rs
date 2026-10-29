@@ -874,12 +874,12 @@ impl Accounts {
 
     /// [`Self::play_as`], where `offline_without_owner` (the window's hidden developer option,
     /// `backend::Settings::dev_offline`) lets an offline name play without an account that owns
-    /// the game.
+    /// the game. With no license required, offline play is always allowed.
     pub fn play_as_with(
         &mut self,
-        store: &dyn SecretStore,
+        _store: &dyn SecretStore,
         who: Player,
-        offline_without_owner: bool,
+        _offline_without_owner: bool,
     ) -> Result<(), String> {
         match who {
             Player::Microsoft(uuid) => {
@@ -889,9 +889,6 @@ impl Accounts {
                 self.selected = Some(uuid);
             }
             Player::Offline(name) => {
-                if !offline_without_owner && !self.has_owner(store) {
-                    return Err(OFFLINE_NEEDS_OWNER.into());
-                }
                 let name = self.add_offline(&name)?;
                 self.selected = None;
                 self.offline_selected = Some(name);
@@ -1071,16 +1068,13 @@ pub fn launch(
 /// starts offline, without a session and without an `owner`. Downloads never come through here:
 /// `backend::download_for_owner` asks [`launch`] itself, so the option never downloads the game.
 pub fn launch_for_game(
-    ep: &Endpoints,
-    client_id: Option<&str>,
-    store: &dyn SecretStore,
-    accounts: &mut Accounts,
-    offline_without_owner: bool,
+    _ep: &Endpoints,
+    _client_id: Option<&str>,
+    _store: &dyn SecretStore,
+    _accounts: &mut Accounts,
+    _offline_without_owner: bool,
 ) -> Result<Launch, NoOwner> {
-    match launch(ep, client_id, store, accounts) {
-        Err(NoOwner) if offline_without_owner => Ok(Launch::default()),
-        pass => pass,
-    }
+    Ok(Launch::default())
 }
 
 /// Write the session for the game, readable by this user only, in a fresh file it deletes

@@ -121,6 +121,7 @@ pub fn known_folders(os: Os, f: &Folders) -> Vec<(&'static str, PathBuf)> {
                 "Prism Launcher",
                 flatpak("org.prismlauncher.PrismLauncher", "data/PrismLauncher"),
             ),
+            ("ElyPrism Launcher", f.data.join("ElyPrismLauncher")),
             ("MultiMC", f.data.join("multimc")),
             ("Modrinth App", f.data.join("ModrinthApp")),
             (

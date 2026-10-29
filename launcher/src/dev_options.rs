@@ -34,6 +34,13 @@ impl Launcher {
                 cx.notify();
             },
         ));
+        let offline_toggle = switch("offline-mode", self.settings.offline_mode, &t).on_click(cx.listener(
+            |this, _: &ClickEvent, _, cx| {
+                this.settings.offline_mode = !this.settings.offline_mode;
+                this.settings.save();
+                cx.notify();
+            },
+        ));
         Some(
             div()
                 .flex()
@@ -55,6 +62,19 @@ impl Launcher {
                             .into_any_element(),
                     ),
                     Some(toggle.into_any_element()),
+                    &t,
+                ))
+                .child(index_row(
+                    1,
+                    "Offline mode (no release list)",
+                    Some(
+                        div()
+                            .child(
+                                "Skip fetching Horizon releases from GitHub; use only local versions.",
+                            )
+                            .into_any_element(),
+                    ),
+                    Some(offline_toggle.into_any_element()),
                     &t,
                 )),
         )

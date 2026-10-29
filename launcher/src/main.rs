@@ -92,9 +92,8 @@ impl Page {
 
     /// Every page, with its name and icon: the top bar shows all but Settings, which has its
     /// own button.
-    const ALL: [(Page, &'static str, &'static str); 6] = [
+    const ALL: [(Page, &'static str, &'static str); 5] = [
         (Page::Play, "Home", "home"),
-        (Page::Mods, "Mods", "package"),
         (Page::Servers, "Servers", "server"),
         (Page::Versions, "Versions", "archive"),
         (Page::Notes, "Patch notes", "notes"),
@@ -2722,7 +2721,7 @@ impl Launcher {
             .child(
                 text(theme::HEADING)
                     .text_color(t.ink)
-                    .child(tr("Horizon crashed")),
+                    .child(tr("FreeHorizon crashed")),
             );
         if !crash.summary.is_empty() {
             body = body.child(div().text_color(t.ink_soft).child(crash.summary));
@@ -2769,7 +2768,7 @@ impl Launcher {
                 .and_then(|r| backend::notes_summary(&r.body)),
             _ => None,
         };
-        let title = "Horizon";
+        let title = "FreeHorizon";
         // Never squeezed by the rows below: the ping notice can make it tall.
         let mut hero = div()
             .flex()
