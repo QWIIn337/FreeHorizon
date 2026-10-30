@@ -6,7 +6,7 @@ FreeHorizon — Minecraft: Java Edition 26.3, переписанный на Rust
 
 ## Скачать
 
-- [Последний релиз](https://github.com/qwn/horizon/releases/latest) — выберите архив для вашей ОС (Linux, Windows, macOS).
+- [Последний релиз](https://github.com/QWIIn337/FreeHorizon/releases/tag/v1.0.0) — выберите архив для вашей ОС (Linux, Windows, macOS).
 - Распакуйте и запустите `run.sh` (Linux/macOS) или `run.bat` (Windows).
 
 ## Быстрый старт (офлайн)
