@@ -784,8 +784,6 @@ pub enum Player {
     GameName,
 }
 
-const OFFLINE_NEEDS_OWNER: &str =
-    "Offline names need a Microsoft account that owns Minecraft: Java Edition in the launcher.";
 
 /// The secrets an account keeps in `store`, if it still has them there.
 fn secrets_in(store: &dyn SecretStore, uuid: &str) -> Option<Secrets> {
